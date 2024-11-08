@@ -1,0 +1,215 @@
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{##}
+{#  <head>#}
+{##}
+{#    <meta charset="utf-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+{#    <meta name="description" content="">#}
+{#    <meta name="author" content="TemplateMo">#}
+{#    <style>#}
+{##}
+{#form {#}
+{#  width: 50%;#}
+{#  margin: 0 auto;#}
+{#  padding: 20px;#}
+{#  border: 1px solid #ccc;#}
+{#  border-radius: 10px;#}
+{#  background-color: #f5f5f5;#}
+{#}#}
+{##}
+{#h2 {#}
+{#  text-align: center;#}
+{#  font-weight: bold;#}
+{#}#}
+{##}
+{#p {#}
+{#  margin-top: 10px;#}
+{#  margin-bottom: 10px;#}
+{#}#}
+{##}
+{#label {#}
+{#  display: block;#}
+{#  font-weight: bold;#}
+{#}#}
+{##}
+{#input[type="text"],#}
+{#input[type="email"],#}
+{#input[type="password"] {#}
+{#  width: 100%;#}
+{#  padding: 10px;#}
+{#  border-radius: 5px;#}
+{#  border: 1px solid #ccc;#}
+{#  margin-bottom: 10px;#}
+{#}#}
+{##}
+{#button[type="submit"] {#}
+{#  background-color: #4CAF50;#}
+{#  color: white;#}
+{#  padding: 10px 20px;#}
+{#  border: none;#}
+{#  border-radius: 5px;#}
+{#  cursor: pointer;#}
+{#  margin-top: 10px;#}
+{#}#}
+{##}
+{#button[type="submit"]:hover {#}
+{#  background-color: #3e8e41;#}
+{#}#}
+{##}
+{#.error-message {#}
+{#  color: red;#}
+{#  margin-top: 5px;#}
+{#  margin-bottom: 5px;#}
+{#  font-size: 0.8rem;#}
+{#}#}
+
+{#    </style>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#{% block content %}#}
+{#  <h2>Sign up</h2>#}
+{#  <form method="post">#}
+{#    {% csrf_token %}#}
+{#    {% for field in form %}#}
+{#      <p>#}
+{#        {{ field.label_tag }}<br>#}
+{#        {{ field }}#}
+{#        {% if field.help_text %}#}
+{#          <small style="color: grey">{{ field.help_text }}</small>#}
+{#        {% endif %}#}
+{#        {% for error in field.errors %}#}
+{#          <p style="color: red">{{ error }}</p>#}
+{#        {% endfor %}#}
+{#      </p>#}
+{#    {% endfor %}#}
+{#    <button type="submit">Sign up</button>#}
+{#  </form>#}
+{#{% endblock %}#}
+{#</body>#}
+{#</html>#}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static "images/icons/favicon.ico" %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "fonts/Linearicons-Free-v1.0.0/icon-font.min.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/animate/animate.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/animsition/css/animsition.min.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/select2/select2.min.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/daterangepicker/daterangepicker.css" %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/util.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+    <!--===============================================================================================-->
+</head>
+<body>
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
+<div class="limiter">
+
+    <div class="container-login100">
+
+        <div class="wrap-login100">
+
+            <div class="login100-form-title" style="background-image: url({% static "images/bg-01.jpg" %});">
+
+					<span class="login100-form-title-1">
+
+						Sign up
+					</span>
+            </div>
+
+            <form class="login100-form validate-form" method="post">
+                {% csrf_token %}
+                {% if errors %}
+                    {% for item in errors %}
+                        <p class="text text-danger rounded bg-white  m-3 mt-0 ">{{ item }}</p>
+                    {% endfor %}
+                {% endif %}
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                    <span class="label-input100">Username</span>
+                    <input class="input100" type="text" name="username" placeholder="Enter username">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                    <span class="label-input100">email</span>
+                    <input class="input100" type="email" name="email" placeholder="Enter email">
+                    <span class="focus-input100"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" type="password" name="password1" placeholder="Enter password">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-18 mt-3" data-validate="Password is required">
+                    <span class="label-input100">password</span>
+                    <input class="input100" type="password" name="password2" placeholder="repeat password">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="flex-sb-m w-full p-b-30">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <div class="ml-3">
+                        <a href="{% url "login" %}" class="txt1 ml-5">
+                            login
+                        </a>
+                    </div>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Sing up
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--===============================================================================================-->
+<script src="{% static "vendor/jquery/jquery-3.2.1.min.js" %}"></script>
+<!--===============================================================================================-->
+<script src="{% static "vendor/animsition/js/animsition.min.js" %}"></script>
+<!--===============================================================================================-->
+<script src="{% static "vendor/bootstrap/js/popper.js" %}"></script>
+<script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+<!--===============================================================================================-->
+<script src="{% static "vendor/select2/select2.min.js" %}"></script>
+<!--===============================================================================================-->
+<script src="{% static "vendor/daterangepicker/moment.min.js" %}"></script>
+<script src="{% static "vendor/daterangepicker/daterangepicker.js" %}"></script>
+<!--===============================================================================================-->
+<script src="{% static "vendor/countdowntime/countdowntime.js" %}"></script>
+<!--===============================================================================================-->
+<script src="{% static "js/main.js" %}"></script>
+
+</body>
+</html>
+
